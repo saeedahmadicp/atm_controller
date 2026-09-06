@@ -6,3 +6,5 @@
 ## internal specification and other files
 docs/*
 
+## build files
+build/*
