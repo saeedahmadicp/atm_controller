@@ -67,9 +67,9 @@ class atmController {
         /**
          * @brief  Verify the PIN for a user's card.
          * @param  pin: The user's PIN.
-         * @return True if the PIN is valid, false otherwise.
+         * @return ErrorState indicating the result of the PIN verification.
          */
-        bool enterPin(const string& pin);
+        ErrorState enterPin(const string& pin);
 
 
         /**
