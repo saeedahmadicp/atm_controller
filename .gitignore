@@ -1,0 +1,8 @@
+## executable and other cache files 
+*.exe
+*.o
+*.so 
+
+## internal specification and other files
+docs/*
+
