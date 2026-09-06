@@ -29,8 +29,14 @@ enum class ErrorState {
     INVALID_PIN,    // Invalid PIN entered
     INSUFFICIENT_FUNDS, // Insufficient funds for withdrawal in the user's account
     INSUFFICIENT_CASH_BIN, // Insufficient cash in the ATM for withdrawal
+    UNABLE_TO_SHOW_BALANCE, // Unable to retrieve balance from the bank service
     INVALID_AMOUNT, // Invalid amount entered for deposit or withdrawal
     ACCOUNT_LOCKED, // User's account is locked (e.g., due to too many failed PIN attempts)
+    INVALID_ACCOUNT, // Invalid account number selected
+    UNABLE_TO_WITHDRAW_CASH_BIN, // Unable to withdraw cash from the ATM's cash bin
+    UNABLE_TO_DEPOSIT_CASH_BIN, // Unable to deposit cash into the ATM's cash bin
+    FAILED_DEPOSIT_BANK_SERVICE, // Failed to deposit into the user's account via the bank service
+    FAILED_WITHDRAWAL_BANK_SERVICE, // Failed to withdraw from the user's account via the bank service
     UNKNOWN_ERROR  // An unknown error occurred
 };
 
@@ -44,7 +50,7 @@ class atmController {
 
         // personal data for the current session
         std::string userCardNumber;  // User's card number
-        std::string userAccountNumber; // User's selected account number
+        std::string userAccountID; // User's selected account ID
         std::vector<std::string> userAccounts; // List of user's account numbers
 
     public:
@@ -56,7 +62,7 @@ class atmController {
         ~atmController() = default;
 
         /**
-         * @brief  Get the Status of the ATM Controller. if the ATM is idle, awaiting PIN, awaiting account selection, or ready for transaction.
+         * @brief  Check if the AtM status is idle to read the card number and change the status to awaiting PIN.
          * @param  cardNumber: The user's card number.
          * @return Status of the ATM SessionState.
          */
@@ -72,10 +78,10 @@ class atmController {
 
         /**
          * @brief Get the account selection for the user after the PIN is verified.
-         * @param accountNumber: The user's selected account number.
+         * @param accountID: The user's selected account ID.
          * @return SessionState indicating the result of the account selection.
          */
-        SessionState selectAccount(const std::string& accountNumber);
+        SessionState selectAccount(const std::string& accountID);
 
         /**
          * @brief  update and show the balance of a user's account.
