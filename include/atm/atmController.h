@@ -13,7 +13,7 @@
 #include <atm/iCashBin.h>
 #include <atm/money.h>
 
-
+namespace atm {
 
 // defining the session for the ATM controller
 enum class SessionState {
@@ -28,15 +28,13 @@ enum class ErrorState {
     OK,           // No error
     INVALID_PIN,    // Invalid PIN entered
     INSUFFICIENT_FUNDS, // Insufficient funds for withdrawal in the user's account
-    INSUFFICIENT_CASE_BIN, // Insufficient cash in the ATM for withdrawal
+    INSUFFICIENT_CASH_BIN, // Insufficient cash in the ATM for withdrawal
     INVALID_AMOUNT, // Invalid amount entered for deposit or withdrawal
     ACCOUNT_LOCKED, // User's account is locked (e.g., due to too many failed PIN attempts)
     UNKNOWN_ERROR  // An unknown error occurred
 };
 
-using namespace std;
 
-namespace atm {
 class atmController { 
     private:
         iBankService* bankService;  // Pointer to the bank service interface
@@ -45,9 +43,9 @@ class atmController {
         ErrorState errorState;      // Current error state
 
         // personal data for the current session
-        string userCardNumber;  // User's card number
-        string userAccountNumber; // User's selected account number
-        vector<string> userAccounts; // List of user's account numbers
+        std::string userCardNumber;  // User's card number
+        std::string userAccountNumber; // User's selected account number
+        std::vector<std::string> userAccounts; // List of user's account numbers
 
     public:
         // Constructor
@@ -62,14 +60,14 @@ class atmController {
          * @param  cardNumber: The user's card number.
          * @return Status of the ATM SessionState.
          */
-        SessionState insertCard(const string& cardNumber);
+        SessionState insertCard(const std::string& cardNumber);
 
         /**
          * @brief  Verify the PIN for a user's card.
          * @param  pin: The user's PIN.
          * @return ErrorState indicating the result of the PIN verification.
          */
-        ErrorState enterPin(const string& pin);
+        ErrorState enterPin(const std::string& pin);
 
 
         /**
@@ -77,11 +75,11 @@ class atmController {
          * @param accountNumber: The user's selected account number.
          * @return SessionState indicating the result of the account selection.
          */
-        SessionState selectAccount(const string& accountNumber);
+        SessionState selectAccount(const std::string& accountNumber);
 
         /**
          * @brief  update and show the balance of a user's account.
-         * @param  Money: The user's account balance.
+         * @param  balance: The user's account balance.
          * @return The ErrorState indicating the result of the balance retrieval.
          */
         ErrorState showBalance(Money& balance);

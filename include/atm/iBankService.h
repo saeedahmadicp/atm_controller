@@ -1,5 +1,5 @@
 /**
- * @file   IBankService.h
+ * @file   iBankService.h
  * @brief  Interface for bank service functionality.
  * @author Saeed Ahmad
  * @date   September 6, 2026
@@ -10,8 +10,6 @@
 #include <vector>
 
 #include <atm/money.h>
-
-using namespace std;
 
 namespace atm {
    
@@ -26,7 +24,7 @@ namespace atm {
          * @param  pin: The user's PIN.
          * @return True if the PIN is valid, false otherwise.
          */
-        virtual bool verifyPin(const string& cardNumber, const string& pin) = 0;
+        virtual bool verifyPin(const std::string& cardNumber, const std::string& pin) = 0;
         
 
         /**
@@ -34,7 +32,7 @@ namespace atm {
          * @param  cardNumber: The user's card number.
          * @return A list of the user's account numbers if the PIN is valid, an empty list otherwise.
          */
-        virtual std::vector<string> getAccounts(const string& cardNumber) = 0;
+        virtual std::vector<std::string> getAccounts(const std::string& cardNumber) = 0;
 
 
         /**
@@ -42,7 +40,7 @@ namespace atm {
          * @param  accountNumber: The user's account number.
          * @return The current balance as a Money type.
          */
-        virtual Money getBalance(const string& accountNumber) = 0;
+        virtual Money getBalance(const std::string& accountNumber) = 0;
 
         /**
          * @brief  Deposit money into a user's account.
@@ -50,7 +48,7 @@ namespace atm {
          * @param  amount: The amount of money to deposit.
          * @return True if the deposit was successful, false otherwise.
          */
-        virtual bool deposit(const string& accountNumber, Money amount) = 0;
+        virtual bool deposit(const std::string& accountNumber, Money amount) = 0;
 
         /**
          * @brief  Withdraw money from a user's account.
@@ -58,6 +56,6 @@ namespace atm {
          * @param  amount: The amount of money to withdraw.
          * @return True if the withdrawal was successful, false otherwise. (false = insufficient funds)
          */
-        virtual bool withdraw(const string& accountNumber, Money amount) = 0;
+        virtual bool withdraw(const std::string& accountNumber, Money amount) = 0;
     };
 }

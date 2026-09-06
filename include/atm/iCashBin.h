@@ -1,5 +1,5 @@
 /**
- * @file   ICashBin.h
+ * @file   iCashBin.h
  * @brief  Interface for cash bin functionality.
  * @author Saeed Ahmad
  * @date   September 6, 2026
@@ -36,5 +36,5 @@ namespace atm {
          */
         virtual Money getBalance() const = 0;
 
-};
+    };
 }
